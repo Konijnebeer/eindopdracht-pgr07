@@ -14,7 +14,10 @@ export default function RootLayout() {
   return (
     <View style={themes[colorScheme ?? 'light']} className="flex-1">
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack />
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="list-modal" options={{ presentation: 'modal', title: 'List' }} />
+        </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>
     </View>

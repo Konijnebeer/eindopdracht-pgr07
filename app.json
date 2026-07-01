@@ -27,6 +27,12 @@
       "bundler": "metro"
     },
     "plugins": [
+      // [
+      //   "react-native-maps",
+      //   {
+      //     "androidGoogleMapsApiKey": "process.env.YOUR_GOOGLE_MAPS_API_KEY"
+      //   }
+      // ],
       "expo-router",
       [
         "expo-splash-screen",

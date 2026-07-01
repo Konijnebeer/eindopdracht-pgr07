@@ -1,0 +1,63 @@
+{
+  "routes": [
+    {
+      "id": 1,
+      "name": "Vlaardingen",
+      "latitude": 51.921718,
+      "longitude": 4.33784,
+      "provincie": "Zuid-Holland",
+      "address": "Watersportweg 11, 3138 HD, Vlaardingen",
+      "omgeving": "De Broekpolder is een polder in een voormalig waterschap ten westen van de Vlaardingervaart in de gemeenten Vlaardingen en Midden-Delfland. Het waterschap was verantwoordelijk voor de vervening, drooglegging en later de waterhuishouding in de polder. Van 1958 tot 1975 werd een deel van het gebied opgespoten met slib uit de Rotterdamse haven. De dikte van deze laag slib bedraagt ongeveer zes meter, waardoor dat deel van de polder een eind boven de omgeving ligt. De Broekpolder is tegenwoordig een groot recreatiegebied met een golfbaan, een manege, sportverenigingen, scouting en sportcentrum De Polderpoort.",
+      "km": 10.7,
+      "hoogtemeters": 93,
+      "marking": [
+        {
+          "type": "blauw",
+          "description": "De route is gemarkeerd met palen met in het blauw het internationale MTB-teken (driehoek met daaronder 2 rondjes)."
+        },
+        {
+          "type": "red",
+          "description": "De route bevat 1 Bikepark. Deze is gemarkeerd met palen met in het rood het internationale MTB-teken (driehoek met daaronder 2 rondjes)."
+        },
+        {
+          "type": "pink",
+          "description": "De route bevat 1 mini-Enduro route. Deze is gemarkeerd met palen met in het paars het internationale MTB-teken (driehoek met daaronder 2 rondjes)."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Nijmegen",
+      "latitude": 51.81408,
+      "longitude": 5.91037,
+      "provincie": "Gelderland",
+      "address": "Oude Kleefsebaan 425, 6572 AZ, Berg en Dal",
+      "omgeving": "Het Rijk van Nijmegen is een heuvelachtige streek in zuidoost Gelderland met heel veel natuurschoon. Als mountainbiker ben je te gast op terreinen die in beheer zijn van Staatsbosbeheer, Natuurmonumenten en andere gemeentelijke en private terreineigenaren. De routes van het MTB routenetwerk Rijk van Nijmegen liggen tussen Nijmegen, Berg en Dal, Groesbeek, en Mook en Middelaar en staan onder beheer van de gelijknamige stichting. In dit heuvelachtige gebied vind je naast een relatief eenvoudige route ook technisch en fysiek interessante en uitdagende routes in een mix van singletrack en wat bredere paden. Gelukkig zijn er voldoende restaurants nabij de route om de uitdagingen beter te kunnen doorstaan.",
+      "km": 15.0,
+      "hoogtemeters": 304,
+      "marking": [
+        {
+          "type": "red",
+          "description": "De route is gemarkeerd met palen met in het rood het internationale MTB-teken (driehoek met daaronder 2 rondjes)."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Zandvoort",
+      "latitude": 52.379875,
+      "longitude": 4.532842,
+      "provincie": "Noord-Holland",
+      "address": "Burgemeester van Alphenstraat 108, 2041 KP, Zandvoort",
+      "omgeving": "Zandvoort is een badplaats in Noord-Holland. De plaats leeft van het toerisme en is ook bekend van het Formule 1 racecircuit, het Circuit Park Zandvoort. Het station Zandvoort aan Zee is het eindpunt van de spoorlijn van Amsterdam via Haarlem. De mountainbikeroute is gelegen in het duingebied nabij het racecircuit. Dit duingebied kenmerkt zich door een gevarieerde flora en fauna. Het meest bekende stuk is de Kennemerduinen. Hier ligt ook het bezoekerscentrum waar u alle ins & outs van de duinen te weten kunt komen.",
+      "km": 9.8,
+      "hoogtemeters": 139,
+      "marking": [
+        {
+          "type": "groen",
+          "description": "De route is gemarkeerd met palen met in het groen het internationale MTB-teken (driehoek met daaronder 2 rondjes)."
+        }
+      ]
+    }
+  ]
+}
