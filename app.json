@@ -33,6 +33,12 @@
       //     "androidGoogleMapsApiKey": "process.env.YOUR_GOOGLE_MAPS_API_KEY"
       //   }
       // ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to use Face ID."
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",

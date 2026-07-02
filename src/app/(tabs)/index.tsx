@@ -1,4 +1,5 @@
 import { Text } from "@/components/ui/text";
+import { View } from "@/components/ui/view";
 import { CustomMarker } from "@/features/routes/components/marker";
 import { useGetRoutes } from "@/features/routes/hooks/query";
 import { iconWithClassName } from "@/lib/icons";
@@ -6,7 +7,7 @@ import * as Location from "expo-location";
 import { router, useLocalSearchParams } from "expo-router";
 import { MapPin, Navigation } from "lucide-react-native";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Platform, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Platform, StyleSheet } from "react-native";
 import MapView, { Marker, type Region } from "react-native-maps";
 
 iconWithClassName(Navigation);
