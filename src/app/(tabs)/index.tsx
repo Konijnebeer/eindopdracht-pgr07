@@ -1,12 +1,79 @@
 import { Text } from "@/components/ui/text";
+import { CustomMarker } from "@/features/routes/components/marker";
+import { useGetRoutes } from "@/features/routes/hooks/query";
 import { iconWithClassName } from "@/lib/icons";
 import * as Location from "expo-location";
-import { Navigation } from "lucide-react-native";
-import { useEffect, useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import { MapPin, Navigation } from "lucide-react-native";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Platform, StyleSheet, View } from "react-native";
 import MapView, { Marker, type Region } from "react-native-maps";
 
 iconWithClassName(Navigation);
+iconWithClassName(MapPin);
+
+function Map({ region }: { region: Region }) {
+  const { data: routes } = useGetRoutes();
+  const { focusRouteId } = useLocalSearchParams<{ focusRouteId?: string }>();
+  const mapRef = useRef<MapView>(null);
+
+  const markers = routes.map((route) => ({
+    id: route.id,
+    coordinate: {
+      latitude: route.latitude,
+      longitude: route.longitude,
+    },
+    title: route.name,
+    description: route.address,
+  }));
+
+  useEffect(() => {
+    if (!focusRouteId) {
+      return;
+    }
+
+    const route = routes.find((r) => r.id.toString() === focusRouteId);
+    if (!route) {
+      return;
+    }
+
+    mapRef.current?.animateToRegion(
+      {
+        latitude: route.latitude,
+        longitude: route.longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      },
+      500,
+    );
+    router.setParams({ focusRouteId: undefined });
+  }, [focusRouteId, routes]);
+
+  function handleRoutePress(routeId: string) {
+    console.log(`Route ${routeId} pressed`);
+    router.push({ pathname: "/route/[id]", params: { id: routeId } });
+  }
+
+  return (
+    <MapView
+      ref={mapRef}
+      style={styles.map}
+      initialRegion={region}
+      showsUserLocation={false}
+    >
+      {markers.map((marker) => (
+        <CustomMarker
+          key={marker.id}
+          marker={marker}
+          onNavigate={(id) => handleRoutePress(id.toString())}
+        />
+      ))}
+      <Marker coordinate={region} anchor={{ x: 0.5, y: 0.5 }}>
+        <Navigation className="text-foreground" size={24} />
+      </Marker>
+    </MapView>
+  );
+}
 
 export default function MapScreen() {
   const [region, setRegion] = useState<Region | null>(null);
@@ -41,23 +108,21 @@ export default function MapScreen() {
   }
 
   if (!region) {
-    return (
-      <View className="flex-1 items-center justify-center">
-        <ActivityIndicator size="large" />
-      </View>
-    );
+    return <LoadingScreen />;
   }
 
   return (
-    <MapView
-      style={styles.map}
-      initialRegion={region}
-      showsUserLocation={false}
-    >
-      <Marker coordinate={region} anchor={{ x: 0.5, y: 0.5 }}>
-        <Navigation className="text-foreground" size={24} />
-      </Marker>
-    </MapView>
+    <Suspense fallback={<LoadingScreen />}>
+      <Map region={region} />
+    </Suspense>
+  );
+}
+
+function LoadingScreen() {
+  return (
+    <View className="flex-1 items-center justify-center">
+      <ActivityIndicator size="large" />
+    </View>
   );
 }
 
