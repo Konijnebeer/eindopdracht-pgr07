@@ -1,7 +1,7 @@
+import { Favorite } from "@/features/routes/type";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { Alert } from "react-native";
-import { Favorite } from "./type";
 
 export function useFavorite(id: number) {
   const [isFavorite, setIsFavorite] = useState(false);

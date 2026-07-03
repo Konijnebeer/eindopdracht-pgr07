@@ -3,9 +3,10 @@ import { View } from "@/components/ui/view";
 import { useGetRouteById, useGetRoutes } from "@/features/routes/hooks/query";
 import { useFavorite } from "@/features/routes/hooks/use-favorite";
 import { parseGpxTrack } from "@/features/routes/utils/gpx";
+import { usePhotos } from "@/features/user/hooks/use-photos";
 import { iconWithClassName } from "@/lib/icons";
 import { useLocalSearchParams, useNavigation } from "expo-router";
-import { Heart, MapPin, Mountain, RouteIcon } from "lucide-react-native";
+import { Camera, Heart, MapPin, Mountain, RouteIcon } from "lucide-react-native";
 import { useColorScheme } from "nativewind";
 import { useLayoutEffect, useMemo } from "react";
 import { Pressable, ScrollView, StyleSheet } from "react-native";
@@ -15,6 +16,7 @@ iconWithClassName(Heart);
 iconWithClassName(Mountain);
 iconWithClassName(RouteIcon);
 iconWithClassName(MapPin);
+iconWithClassName(Camera);
 
 export default function UserScreen() {
   const { id } = useLocalSearchParams();
@@ -30,6 +32,8 @@ export default function UserScreen() {
 
   const { isFavorite, toggleFavorite } = useFavorite(Number(id));
 
+  const { takePhoto, isTaking } = usePhotos();
+
   const { colorScheme } = useColorScheme();
   const foreground = colorScheme === "dark" ? "#f7faf5" : "#0c1710";
 
@@ -39,6 +43,23 @@ export default function UserScreen() {
       navigation.setOptions({ title: name });
     }
     navigation.setOptions({
+      headerLeft: () => (
+        <Pressable
+          disabled={isTaking || !location}
+          onPress={() =>
+            location &&
+            takePhoto({
+              routeId: location.id,
+              routeName: location.name,
+            })
+          }
+        >
+          <Camera
+            className={isTaking ? "text-muted-foreground" : "text-foreground"}
+            size={24}
+          />
+        </Pressable>
+      ),
       headerRight: () => (
         <Pressable onPress={() => toggleFavorite(Number(id))}>
           <Heart
@@ -49,7 +70,7 @@ export default function UserScreen() {
         </Pressable>
       ),
     });
-  }, [id, navigation, routes, isFavorite, toggleFavorite]);
+  }, [id, navigation, routes, isFavorite, toggleFavorite, location, takePhoto, isTaking]);
 
   return (
     <View className="flex-1 px-10 py-12">
