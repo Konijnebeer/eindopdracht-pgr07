@@ -26,11 +26,12 @@ export function useGetRoutes() {
 
 async function getRouteById(id: number) {
   const response = await fetch(
-    `https://raw.githubusercontent.com/Konijnebeer/eindopdracht-pgr07/refs/heads/main/api/route${id}.gpx`,
+    `https://raw.githubusercontent.com/Konijnebeer/eindopdracht-pgr07/refs/heads/main/api/route/${id}.gpx`,
   );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch route");
+    return null
+    // throw new Error("Failed to fetch route");
   }
   const data = await response.text();
   return data;

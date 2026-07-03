@@ -2,12 +2,14 @@ import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useGetRouteById, useGetRoutes } from "@/features/routes/hooks/query";
 import { useFavorite } from "@/features/routes/hooks/use-favorite";
+import { parseGpxTrack } from "@/features/routes/utils/gpx";
 import { iconWithClassName } from "@/lib/icons";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { Heart, MapPin, Mountain, RouteIcon } from "lucide-react-native";
-import { useLayoutEffect } from "react";
-import { Pressable } from "react-native";
-import MapView from "react-native-maps";
+import { useColorScheme } from "nativewind";
+import { useLayoutEffect, useMemo } from "react";
+import { Pressable, ScrollView, StyleSheet } from "react-native";
+import MapView, { Marker, Polyline } from "react-native-maps";
 
 iconWithClassName(Heart);
 iconWithClassName(Mountain);
@@ -23,7 +25,13 @@ export default function UserScreen() {
 
   const { data: route } = useGetRouteById(Number(id));
 
+  const track = useMemo(() => (route ? parseGpxTrack(route) : []), [route]);
+  const start = track[0];
+
   const { isFavorite, toggleFavorite } = useFavorite(Number(id));
+
+  const { colorScheme } = useColorScheme();
+  const foreground = colorScheme === "dark" ? "#f7faf5" : "#0c1710";
 
   useLayoutEffect(() => {
     const name = routes?.find((route) => route.id.toString() === id)?.name;
@@ -46,17 +54,17 @@ export default function UserScreen() {
   return (
     <View className="flex-1 px-10 py-12">
       {location ? (
-        <>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View className="flex-row gap-2 justify-around">
             <View className="flex-row gap-2 items-center">
-              <Mountain />
+              <Mountain className="text-foreground" />
               <Text>
                 <Text className="font-bold">{location.hoogtemeters}</Text>
                 Hoogtemeters
               </Text>
             </View>
             <View className="flex-row gap-2 items-center">
-              <RouteIcon />
+              <RouteIcon className="text-foreground" />
               <Text>
                 <Text className="font-bold">{location.hoogtemeters}</Text>
                 Kilometer
@@ -100,18 +108,41 @@ export default function UserScreen() {
             ))}
           </View>
           <MapView
-            className="w-full h-64 mt-4 rounded-lg"
+            style={styles.map}
             initialRegion={{
-              latitude: location.latitude,
-              longitude: location.longitude,
-              latitudeDelta: 0.01,
-              longitudeDelta: 0.01,
+              latitude: start?.latitude ?? location.latitude,
+              longitude: start?.longitude ?? location.longitude,
+              latitudeDelta: 0.03,
+              longitudeDelta: 0.03,
             }}
-          ></MapView>
-        </>
+          >
+            {track.length > 1 && (
+              <Polyline
+                coordinates={track}
+                strokeColor={foreground}
+                strokeWidth={3}
+              />
+            )}
+            {start && (
+              <Marker coordinate={start} title="Start">
+                <MapPin className="text-primary" size={32} />
+              </Marker>
+            )}
+          </MapView>
+        </ScrollView>
       ) : (
         <Text className="text-lg font-bold">Route not found</Text>
       )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  map: {
+    width: "100%",
+    height: 256,
+    marginTop: 16,
+    borderRadius: 8,
+    overflow: "hidden",
+  },
+});
