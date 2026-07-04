@@ -3,7 +3,7 @@ import { type Locale, useTranslation } from "@/lib/i18n";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 
 const API_BASE =
-  "https://raw.githubusercontent.com/Konijnebeer/eindopdracht-pgr07/refs/heads/main/api";
+  "https://raw.githubusercontent.com/Konijnebeer/eindopdracht-prg07/refs/heads/main/api";
 
 // --- Get all ---
 
