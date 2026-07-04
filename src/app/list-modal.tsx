@@ -3,6 +3,7 @@ import { ActivityIndicator, Pressable, ScrollView } from "react-native";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useGetRoutes } from "@/features/routes/hooks/query";
+import { useTranslation } from "@/lib/i18n";
 import { iconWithClassName } from "@/lib/icons";
 import { router } from "expo-router";
 import { MapPinned } from "lucide-react-native";
@@ -12,9 +13,12 @@ iconWithClassName(MapPinned);
 
 function RouteList() {
   const { data: routes } = useGetRoutes();
+  const { t } = useTranslation();
 
   if (routes.length === 0) {
-    return <Text className="text-muted-foreground">No routes available</Text>;
+    return (
+      <Text className="text-muted-foreground">{t("routes.empty")}</Text>
+    );
   }
 
   function handleRoutePress(routeId: string) {

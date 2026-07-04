@@ -4,6 +4,7 @@ import { useGetRouteById, useGetRoutes } from "@/features/routes/hooks/query";
 import { useFavorite } from "@/features/routes/hooks/use-favorite";
 import { parseGpxTrack } from "@/features/routes/utils/gpx";
 import { usePhotos } from "@/features/user/hooks/use-photos";
+import { useTranslation } from "@/lib/i18n";
 import { iconWithClassName } from "@/lib/icons";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import { Camera, Heart, MapPin, Mountain, RouteIcon } from "lucide-react-native";
@@ -36,6 +37,8 @@ export default function UserScreen() {
 
   const { colorScheme } = useColorScheme();
   const foreground = colorScheme === "dark" ? "#f7faf5" : "#0c1710";
+
+  const { t } = useTranslation();
 
   useLayoutEffect(() => {
     const name = routes?.find((route) => route.id.toString() === id)?.name;
@@ -81,23 +84,25 @@ export default function UserScreen() {
               <Mountain className="text-foreground" />
               <Text>
                 <Text className="font-bold">{location.hoogtemeters}</Text>
-                Hoogtemeters
+                {t("route.elevation")}
               </Text>
             </View>
             <View className="flex-row gap-2 items-center">
               <RouteIcon className="text-foreground" />
               <Text>
                 <Text className="font-bold">{location.hoogtemeters}</Text>
-                Kilometer
+                {t("route.kilometer")}
               </Text>
             </View>
           </View>
           <View className="mt-4 gap-2">
             <Text className="text-md">
-              <Text className="font-bold">Provincie:</Text> {location.provincie}
+              <Text className="font-bold">{t("route.province")}</Text>{" "}
+              {location.provincie}
             </Text>
             <Text className="text-md">
-              <Text className="font-bold">Address: </Text> {location.address}
+              <Text className="font-bold">{t("route.address")}</Text>{" "}
+              {location.address}
             </Text>
           </View>
           <View>
@@ -145,14 +150,14 @@ export default function UserScreen() {
               />
             )}
             {start && (
-              <Marker coordinate={start} title="Start">
+              <Marker coordinate={start} title={t("route.start")}>
                 <MapPin className="text-primary" size={32} />
               </Marker>
             )}
           </MapView>
         </ScrollView>
       ) : (
-        <Text className="text-lg font-bold">Route not found</Text>
+        <Text className="text-lg font-bold">{t("route.notFound")}</Text>
       )}
     </View>
   );

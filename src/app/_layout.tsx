@@ -11,6 +11,7 @@ import { useColorScheme } from "nativewind";
 import { getThemeColor } from "@/lib/theme";
 
 import { View } from "@/components/ui/view";
+import { I18nProvider, useTranslation } from "@/lib/i18n";
 import "../../global.css";
 
 const queryClient = new QueryClient();
@@ -31,10 +32,11 @@ const navigationThemes = {
 
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
+  const { t } = useTranslation();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <View className="flex-1">
+      <I18nProvider>
         <ThemeProvider
           value={
             colorScheme === "dark"
@@ -42,17 +44,21 @@ export default function RootLayout() {
               : navigationThemes.light
           }
         >
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen
-              name="list-modal"
-              options={{ presentation: "modal", title: "Routes" }}
-            />
-            <Stack.Screen name="route" options={{ headerShown: false }} />
-          </Stack>
-          <StatusBar style="auto" />
+          <View className="flex-1">
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="list-modal"
+                options={{ presentation: "modal", title: t("routes.title") }}
+              />
+              <Stack.Screen name="route" options={{ headerShown: false }} />
+            </Stack>
+            <StatusBar style="auto" />
+          </View>
         </ThemeProvider>
-      </View>
+      </I18nProvider>
     </QueryClientProvider>
   );
 }
+
+

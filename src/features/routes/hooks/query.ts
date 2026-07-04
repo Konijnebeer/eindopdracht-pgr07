@@ -1,12 +1,14 @@
 import { Route } from "@/features/routes/type";
+import { type Locale, useTranslation } from "@/lib/i18n";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+
+const API_BASE =
+  "https://raw.githubusercontent.com/Konijnebeer/eindopdracht-pgr07/refs/heads/main/api";
 
 // --- Get all ---
 
-async function getRoutes() {
-  const response = await fetch(
-    "https://raw.githubusercontent.com/Konijnebeer/eindopdracht-pgr07/refs/heads/main/api/locations.json",
-  );
+async function getRoutes(locale: Locale) {
+  const response = await fetch(`${API_BASE}/${locale}/locations.json`);
   if (!response.ok) {
     throw new Error("Failed to fetch routes");
   }
@@ -14,23 +16,24 @@ async function getRoutes() {
   return data.routes as Route[];
 }
 
-export const getRoutesQueryOptions = queryOptions({
-  queryKey: ["routes"] as const,
-  queryFn: getRoutes,
-  staleTime: 1000 * 60 * 5, // 5 minutes
-});
+export const getRoutesQueryOptions = (locale: Locale) =>
+  queryOptions({
+    queryKey: ["routes", locale] as const,
+    queryFn: () => getRoutes(locale),
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
 
 export function useGetRoutes() {
-  return useSuspenseQuery(getRoutesQueryOptions);
+  const { locale } = useTranslation();
+  return useSuspenseQuery(getRoutesQueryOptions(locale));
 }
 
+// GPX tracks are just coordinates, so they are shared across languages.
 async function getRouteById(id: number) {
-  const response = await fetch(
-    `https://raw.githubusercontent.com/Konijnebeer/eindopdracht-pgr07/refs/heads/main/api/route/${id}.gpx`,
-  );
+  const response = await fetch(`${API_BASE}/route/${id}.gpx`);
 
   if (!response.ok) {
-    return null
+    return null;
     // throw new Error("Failed to fetch route");
   }
   const data = await response.text();
@@ -39,7 +42,7 @@ async function getRouteById(id: number) {
 
 export const getRouteByIdQueryOptions = (id: number) =>
   queryOptions({
-    queryKey: [...getRoutesQueryOptions.queryKey, id] as const,
+    queryKey: ["route", id] as const,
     queryFn: () => getRouteById(id),
     staleTime: 1000 * 60 * 5, // 5 minutes
   });

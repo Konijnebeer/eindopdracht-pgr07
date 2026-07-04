@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useProfileAuth } from "@/features/user/hooks/use-profile-auth";
+import { useTranslation } from "@/lib/i18n";
 import { iconWithClassName } from "@/lib/icons";
 import { router, Stack } from "expo-router";
 import { Cog, Lock } from "lucide-react-native";
@@ -12,20 +13,21 @@ iconWithClassName(Lock);
 
 export default function ProfileLayout() {
   const { isAuthenticated, error, authenticate } = useProfileAuth();
+  const { t } = useTranslation();
 
   if (!isAuthenticated) {
     return (
       <View className="flex-1 items-center justify-center gap-4 p-6">
         <Lock className="text-foreground" size={48} />
         <Text className="text-center text-lg font-semibold">
-          Profile locked
+          {t("profile.locked")}
         </Text>
         {error && (
           <Text className="text-center text-sm text-muted-foreground">
             {error}
           </Text>
         )}
-        <Button label="Unlock" onPress={authenticate} />
+        <Button label={t("profile.unlock")} onPress={authenticate} />
       </View>
     );
   }
@@ -35,7 +37,7 @@ export default function ProfileLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Profile",
+          title: t("profile.title"),
           headerRight: () => (
             <Pressable onPress={() => router.push("/profile/settings")}>
               <Cog className="text-foreground" size={24} />
@@ -46,10 +48,10 @@ export default function ProfileLayout() {
       <Stack.Screen
         name="settings"
         options={{
-          title: "Settings",
+          title: t("settings.title"),
         }}
       />
-      <Stack.Screen name="photos" options={{ title: "Photos" }} />
+      <Stack.Screen name="photos" options={{ title: t("photos.title") }} />
     </Stack>
   );
 }

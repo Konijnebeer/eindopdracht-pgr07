@@ -1,6 +1,7 @@
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { Photo } from "@/features/user/type";
+import { useTranslation } from "@/lib/i18n";
 import { iconWithClassName } from "@/lib/icons";
 import { Image } from "expo-image";
 import { MapPin, Trash2 } from "lucide-react-native";
@@ -16,6 +17,8 @@ export function PhotoCard({
   photo: Photo;
   onDelete: (id: string) => void;
 }) {
+  const { locale } = useTranslation();
+
   return (
     <View className="overflow-hidden rounded-lg border border-border">
       <Image
@@ -30,7 +33,7 @@ export function PhotoCard({
             <Text className="font-bold">{photo.routeName}</Text>
           </View>
           <Text className="text-sm text-muted-foreground">
-            {new Date(photo.takenAt).toLocaleString("nl-NL", {
+            {new Date(photo.takenAt).toLocaleString(locale, {
               day: "2-digit",
               month: "2-digit",
               year: "numeric",

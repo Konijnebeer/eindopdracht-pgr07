@@ -1,4 +1,5 @@
 import { Text } from "@/components/ui/text";
+import { useTranslation } from "@/lib/i18n";
 import { iconWithClassName } from "@/lib/icons";
 import { Tabs, useRouter } from "expo-router";
 import { List, Map, User } from "lucide-react-native";
@@ -10,13 +11,14 @@ iconWithClassName(User);
 
 export default function TabsLayout() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   return (
     <Tabs>
       <Tabs.Screen
         name="index"
         options={{
-          title: "Map",
+          title: t("tabs.map"),
           tabBarIcon: ({ focused, size }) => (
             <Map
               className={focused ? "text-primary" : "text-foreground"}
@@ -27,7 +29,7 @@ export default function TabsLayout() {
             <Text
               className={`text-xs ${focused ? "text-primary" : "text-foreground"}`}
             >
-              Map
+              {t("tabs.map")}
             </Text>
           ),
           headerRight: () => (
@@ -43,7 +45,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Profile",
+          title: t("tabs.profile"),
           headerShown: false,
           tabBarIcon: ({ focused, size }) => (
             <User
@@ -55,7 +57,7 @@ export default function TabsLayout() {
             <Text
               className={`text-xs ${focused ? "text-primary" : "text-foreground"}`}
             >
-              Profile
+              {t("tabs.profile")}
             </Text>
           ),
         }}

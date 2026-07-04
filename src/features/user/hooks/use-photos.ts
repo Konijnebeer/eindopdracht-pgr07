@@ -1,7 +1,11 @@
+import {
+  deletePhoto,
+  getPhotos,
+  takeAndSavePhoto,
+} from "@/features/user/photo";
+import { Photo, PhotoLocation } from "@/features/user/type";
 import { useCallback, useEffect, useState } from "react";
 import { Alert } from "react-native";
-import { deletePhoto, getPhotos, takeAndSavePhoto } from "@/features/user/photo";
-import { Photo, PhotoLocation } from "@/features/user/type";
 
 export function usePhotos() {
   const [photos, setPhotos] = useState<Photo[]>([]);

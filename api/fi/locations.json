@@ -1,0 +1,63 @@
+{
+  "routes": [
+    {
+      "id": 1,
+      "name": "Vlaardingen",
+      "latitude": 51.921718,
+      "longitude": 4.33784,
+      "provincie": "Etelä-Hollanti",
+      "address": "Watersportweg 11, 3138 HD, Vlaardingen",
+      "omgeving": "Broekpolder on polderi entisellä vesipiirialueella Vlaardingervaartin länsipuolella Vlaardingenin ja Midden-Delflandin kunnissa. Vesipiiri vastasi turpeennostosta, kuivatuksesta ja myöhemmin polderin vesitaloudesta. Vuosina 1958–1975 osa alueesta täytettiin Rotterdamin sataman lietteellä. Tämä lietekerros on noin kuusi metriä paksu, minkä vuoksi kyseinen osa polderista kohoaa selvästi ympäristöään korkeammalle. Nykyään Broekpolder on laaja virkistysalue, jossa on golfkenttä, ratsastuskoulu, urheiluseuroja, partiotoimintaa ja urheilukeskus De Polderpoort.",
+      "km": 10.7,
+      "hoogtemeters": 93,
+      "marking": [
+        {
+          "type": "blauw",
+          "description": "Reitti on merkitty tolpilla, joissa on sininen kansainvälinen maastopyöräilymerkki (kolmio ja sen alla kaksi ympyrää)."
+        },
+        {
+          "type": "red",
+          "description": "Reittiin kuuluu 1 pyöräpuisto. Se on merkitty tolpilla, joissa on punainen kansainvälinen maastopyöräilymerkki (kolmio ja sen alla kaksi ympyrää)."
+        },
+        {
+          "type": "pink",
+          "description": "Reittiin kuuluu 1 mini-Enduro-reitti. Se on merkitty tolpilla, joissa on violetti kansainvälinen maastopyöräilymerkki (kolmio ja sen alla kaksi ympyrää)."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Nijmegen",
+      "latitude": 51.81408,
+      "longitude": 5.91037,
+      "provincie": "Gelderland",
+      "address": "Oude Kleefsebaan 425, 6572 AZ, Berg en Dal",
+      "omgeving": "Rijk van Nijmegen on kumpuileva seutu Kaakkois-Gelderlandissa, jossa on runsaasti luonnonkauneutta. Maastopyöräilijänä olet vieraana mailla, joita hallinnoivat Staatsbosbeheer, Natuurmonumenten sekä muut kunnalliset ja yksityiset maanomistajat. Rijk van Nijmegenin maastopyöräverkoston reitit sijaitsevat Nijmegenin, Berg en Dalin, Groesbeekin sekä Mook en Middelaarin välissä, ja niitä hallinnoi samanniminen säätiö. Tällä kumpuilevalla alueella on suhteellisen helpon reitin lisäksi teknisesti ja fyysisesti kiinnostavia ja haastavia reittejä, joissa yhdistyvät kapeat polut ja leveämmät tiet. Onneksi reitin lähellä on runsaasti ravintoloita, jotka auttavat selviämään haasteista.",
+      "km": 15.0,
+      "hoogtemeters": 304,
+      "marking": [
+        {
+          "type": "red",
+          "description": "Reitti on merkitty tolpilla, joissa on punainen kansainvälinen maastopyöräilymerkki (kolmio ja sen alla kaksi ympyrää)."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Zandvoort",
+      "latitude": 52.379875,
+      "longitude": 4.532842,
+      "provincie": "Pohjois-Hollanti",
+      "address": "Burgemeester van Alphenstraat 108, 2041 KP, Zandvoort",
+      "omgeving": "Zandvoort on merenrantakohde Pohjois-Hollannissa. Kaupunki elää matkailusta ja tunnetaan myös Formula 1 -radastaan, Circuit Park Zandvoortista. Zandvoort aan Zeen asema on Amsterdamista Haarlemin kautta kulkevan rautatien päätepiste. Maastopyöräreitti sijaitsee dyynialueella radan lähellä. Tälle dyynialueelle on ominaista monipuolinen kasvisto ja eläimistö. Tunnetuin osa on Kennemerduinen. Täällä sijaitsee myös vierailukeskus, jossa voit oppia kaiken dyyneistä.",
+      "km": 9.8,
+      "hoogtemeters": 139,
+      "marking": [
+        {
+          "type": "groen",
+          "description": "Reitti on merkitty tolpilla, joissa on vihreä kansainvälinen maastopyöräilymerkki (kolmio ja sen alla kaksi ympyrää)."
+        }
+      ]
+    }
+  ]
+}

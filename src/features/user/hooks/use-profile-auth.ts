@@ -2,6 +2,8 @@ import * as LocalAuthentication from "expo-local-authentication";
 import { useCallback, useEffect, useState } from "react";
 import { AppState } from "react-native";
 
+import { t } from "@/lib/i18n";
+
 export function useProfileAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,13 +21,13 @@ export function useProfileAuth() {
     }
 
     const result = await LocalAuthentication.authenticateAsync({
-      promptMessage: "Unlock your profile",
+      promptMessage: t("auth.prompt"),
     });
 
     if (result.success) {
       setIsAuthenticated(true);
     } else {
-      setError("Authentication failed. Try again.");
+      setError(t("auth.failed"));
     }
   }, []);
 

@@ -2,6 +2,7 @@ import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { CustomMarker } from "@/features/routes/components/marker";
 import { useGetRoutes } from "@/features/routes/hooks/query";
+import { useTranslation } from "@/lib/i18n";
 import { iconWithClassName } from "@/lib/icons";
 import * as Location from "expo-location";
 import { router, useLocalSearchParams } from "expo-router";
@@ -79,12 +80,13 @@ function Map({ region }: { region: Region }) {
 export default function MapScreen() {
   const [region, setRegion] = useState<Region | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function getCurrentLocation() {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
+        setErrorMsg("map.permissionDenied");
         return;
       }
 
@@ -101,11 +103,11 @@ export default function MapScreen() {
   }, []);
 
   if (Platform.OS !== "ios" && Platform.OS !== "android") {
-    return <Text>Maps are only available on Android and iOS</Text>;
+    return <Text>{t("map.unsupported")}</Text>;
   }
 
   if (errorMsg) {
-    return <Text>{errorMsg}</Text>;
+    return <Text>{t(errorMsg)}</Text>;
   }
 
   if (!region) {
