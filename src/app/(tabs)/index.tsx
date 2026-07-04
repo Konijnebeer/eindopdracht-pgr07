@@ -86,7 +86,7 @@ export default function MapScreen() {
     async function getCurrentLocation() {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        setErrorMsg("map.permissionDenied");
+        setErrorMsg(t("map.permissionDenied"));
         return;
       }
 
@@ -107,7 +107,7 @@ export default function MapScreen() {
   }
 
   if (errorMsg) {
-    return <Text>{t(errorMsg)}</Text>;
+    return <Text>{errorMsg}</Text>;
   }
 
   if (!region) {

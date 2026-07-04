@@ -7,7 +7,13 @@ import { usePhotos } from "@/features/user/hooks/use-photos";
 import { useTranslation } from "@/lib/i18n";
 import { iconWithClassName } from "@/lib/icons";
 import { useLocalSearchParams, useNavigation } from "expo-router";
-import { Camera, Heart, MapPin, Mountain, RouteIcon } from "lucide-react-native";
+import {
+  Camera,
+  Heart,
+  MapPin,
+  Mountain,
+  RouteIcon,
+} from "lucide-react-native";
 import { useColorScheme } from "nativewind";
 import { useLayoutEffect, useMemo } from "react";
 import { Pressable, ScrollView, StyleSheet } from "react-native";
@@ -73,7 +79,16 @@ export default function UserScreen() {
         </Pressable>
       ),
     });
-  }, [id, navigation, routes, isFavorite, toggleFavorite, location, takePhoto, isTaking]);
+  }, [
+    id,
+    navigation,
+    routes,
+    isFavorite,
+    toggleFavorite,
+    location,
+    takePhoto,
+    isTaking,
+  ]);
 
   return (
     <View className="flex-1 px-10 py-12">
@@ -83,14 +98,14 @@ export default function UserScreen() {
             <View className="flex-row gap-2 items-center">
               <Mountain className="text-foreground" />
               <Text>
-                <Text className="font-bold">{location.hoogtemeters}</Text>
+                <Text className="font-bold">{location.hoogtemeters}</Text>{" "}
                 {t("route.elevation")}
               </Text>
             </View>
             <View className="flex-row gap-2 items-center">
               <RouteIcon className="text-foreground" />
               <Text>
-                <Text className="font-bold">{location.hoogtemeters}</Text>
+                <Text className="font-bold">{location.hoogtemeters}</Text>{" "}
                 {t("route.kilometer")}
               </Text>
             </View>

@@ -5,8 +5,6 @@ import { Photo, PhotoLocation } from "@/features/user/type";
 
 const STORAGE_KEY = "photos";
 
-
-
 /// Get all photos saved on the device
 export async function getPhotos() {
   const value = await AsyncStorage.getItem(STORAGE_KEY);
